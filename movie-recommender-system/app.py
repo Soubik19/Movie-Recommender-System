@@ -37,7 +37,7 @@ def recommend(movie):
 
 
 st.header('Movie Recommender System')
-movies = pickle.load(open('movie_list.pkl', 'rb'))
+movies = pickle.load(open('movie-recommender-system/movie_list.pkl', 'rb'))
 
 cv = CountVectorizer(max_features=5000, stop_words='english')
 vector = cv.fit_transform(movies['tags']).toarray()
