@@ -1,10 +1,16 @@
 import streamlit as st
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 import pickle
 import requests
 
 st.header('Movie Recommender System')
 movies = pickle.load(open('movie_list.pkl', 'rb'))
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+
+
+cv = CountVectorizer(max_features=5000, stop_words='english')
+vector = cv.fit_transform(movies['tags']).toarray()
+similarity = cosine_similarity(vector)
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
